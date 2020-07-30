@@ -1,0 +1,16 @@
+db:
+  hostname: 127.0.0.233
+  username: hahah
+  password: this_is_pwd
+
+no:
+  a: 233
+  b: true
+  c: 'emm'
+
+str: 'hell'
+
+arr:
+  - '233'
+  - 'emmmmm'
+  - 'why'

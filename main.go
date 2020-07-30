@@ -2,6 +2,7 @@ package main
 
 import (
 	"dl-admin-go/routers"
+	_ "dl-admin-go/utils"
 	"fmt"
 	"os"
 )
