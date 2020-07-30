@@ -3,14 +3,8 @@ db:
   username: hahah
   password: this_is_pwd
 
-no:
-  a: 233
-  b: true
-  c: 'emm'
-
-str: 'hell'
-
-arr:
-  - '233'
-  - 'emmmmm'
-  - 'why'
+auth:
+  secret: thisissecret!@#
+  issuer: dl-admin-go
+  audience: fe
+  expireMinutes: 120

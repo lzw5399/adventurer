@@ -6,10 +6,8 @@
 package configs
 
 type Config struct {
-	Db  Db       `yaml:"db"`
-	No  No       `yaml:"no"`
-	Str string   `yaml:"str"`
-	Arr []string `yaml:"arr"`
+	Db Db `yaml:"db"`
+	Auth Auth `yaml:"auth"`
 }
 
 type Db struct {
@@ -18,8 +16,9 @@ type Db struct {
 	Password string `yaml:"password"`
 }
 
-type No struct {
-	A int    `yaml:"a"`
-	B bool   `yaml:"b"`
-	C string `yaml:"c"`
+type Auth struct {
+	Secret string `yaml:"secret"`
+	Issuer string `yaml:"issuer"`
+	Audience string `yaml:"audience"`
+	ExpireMinutes int64 `yaml:"expireMinutes"`
 }

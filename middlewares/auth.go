@@ -5,10 +5,62 @@
  */
 package middlewares
 
-import "github.com/gin-gonic/gin"
+import (
+	"dl-admin-go/models"
+	"dl-admin-go/utils"
+	"errors"
+	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
+	"net/http"
+	"strings"
+)
 
-func Auth() gin.HandlerFunc{
+var (
+	authConfigs = utils.Config.Auth
+)
+
+func Auth() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		authHeader := c.Request.Header.Get("Authorization")
+		if authHeader == "" {
+			c.Status(http.StatusUnauthorized)
+			c.Abort()
+			return
+		}
 
+		// 按空格分割
+		parts := strings.SplitN(authHeader, " ", 2)
+		if len(parts) != 2 || parts[0] != "Bearer" {
+			c.Status(http.StatusUnauthorized)
+			c.Abort()
+			return
+		}
+
+		// parts[1]是获取到的tokenString，我们使用之前定义好的解析JWT的函数来解析它
+		claims, err := parseToken(parts[1])
+		if err != nil {
+			c.Status(http.StatusUnauthorized)
+			c.Abort()
+			return
+		}
+
+		// 将claims存入请求的上下文
+		c.Set("currentUser", claims)
+		c.Next()
 	}
+}
+
+// 解析token为
+func parseToken(tokenString string) (*models.CustomClaims, error) {
+	// 解析token
+	token, err := jwt.ParseWithClaims(tokenString, &models.CustomClaims{}, func(token *jwt.Token) (i interface{}, err error) {
+		return []byte(authConfigs.Secret), nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	if claims, ok := token.Claims.(*models.CustomClaims); ok && token.Valid { // 校验token
+		return claims, nil
+	}
+	return nil, errors.New("invalid token")
 }
