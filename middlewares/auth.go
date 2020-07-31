@@ -13,6 +13,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
+	"time"
 )
 
 var (
@@ -39,6 +40,15 @@ func Auth() gin.HandlerFunc {
 		// parts[1]是获取到的tokenString，我们使用之前定义好的解析JWT的函数来解析它
 		claims, err := parseToken(parts[1])
 		if err != nil {
+			c.Status(http.StatusUnauthorized)
+			c.Abort()
+			return
+		}
+
+		// 检查令牌信息是否满足要求
+		if claims.Issuer != authConfigs.Issuer ||
+			claims.Audience != authConfigs.Audience ||
+			claims.ExpiresAt < time.Now().Unix() {
 			c.Status(http.StatusUnauthorized)
 			c.Abort()
 			return

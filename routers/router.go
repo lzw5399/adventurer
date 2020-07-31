@@ -26,6 +26,5 @@ func InitRouter() *gin.Engine {
 		authGroup.GET("user", controllers.GetCurrentUser)
 	}
 
-
 	return r
 }
