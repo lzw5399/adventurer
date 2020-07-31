@@ -3,6 +3,7 @@ package controllers
 import (
 	"dl-admin-go/models"
 	"dl-admin-go/services"
+	"dl-admin-go/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -18,10 +19,18 @@ func Login(c *gin.Context) {
 	if token, success := services.Login(user); success {
 		c.String(http.StatusOK, token)
 	} else {
-		c.Status(http.StatusUnauthorized)
+		utils.NewError(c, http.StatusUnauthorized, "login failed")
 	}
 }
 
+// @summary 获取指定ID记录
+// @Description get record by ID
+// @Accept  json
+// @Produce json
+// @Param   some_id path int true "userId"
+// @Success 200 {string} string	"ok"
+// @Security ApiKeyAuth
+// @Router /user [get]
 func GetCurrentUser(c *gin.Context) {
 	a, _ := c.Get("currentUser")
 

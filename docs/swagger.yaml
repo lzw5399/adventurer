@@ -1,0 +1,34 @@
+info:
+  contact: {}
+  description: dl-admin backend api document
+  license: {}
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /user:
+    get:
+      consumes:
+      - application/json
+      description: get record by ID
+      parameters:
+      - description: userId
+        in: path
+        name: some_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取指定ID记录
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
