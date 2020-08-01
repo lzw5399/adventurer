@@ -12,3 +12,5 @@
    > github.com/gin-contrib/cors
 - JWT
    > github.com/dgrijalva/jwt-go
+- Log
+   > github.com/sirupsen/logrus
