@@ -367,6 +367,8 @@ paket-files/
 .idea/
 *.sln.iml
 
+.vscode/
+
 # CodeRush personal settings
 .cr/personal
 
