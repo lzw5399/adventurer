@@ -10,6 +10,10 @@ import (
 	"net/http"
 )
 
+func Register(c *gin.Context) {
+
+}
+
 // @summary 用户登陆
 // @Accept  json
 // @Produce json
