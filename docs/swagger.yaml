@@ -1,3 +1,11 @@
+definitions:
+  models.User:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
 info:
   contact: {}
   description: dl-admin backend api document
@@ -5,27 +13,39 @@ info:
   title: Swagger Example API
   version: "1.0"
 paths:
-  /user:
-    get:
+  /login:
+    post:
       consumes:
       - application/json
-      description: get record by ID
       parameters:
-      - description: userId
-        in: path
-        name: some_id
+      - description: username&pwd
+        in: body
+        name: user
         required: true
-        type: integer
+        schema:
+          $ref: '#/definitions/models.User'
       produces:
       - application/json
       responses:
         "200":
-          description: ok
+          description: token
           schema:
             type: string
+      summary: 用户登陆
+  /user:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
       security:
       - ApiKeyAuth: []
-      summary: 获取指定ID记录
+      summary: 获取当前的用户信息
 securityDefinitions:
   ApiKeyAuth:
     in: header

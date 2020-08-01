@@ -4,10 +4,18 @@ import (
 	"dl-admin-go/models"
 	"dl-admin-go/services"
 	"dl-admin-go/utils"
+
 	"github.com/gin-gonic/gin"
+
 	"net/http"
 )
 
+// @summary 用户登陆
+// @Accept  json
+// @Produce json
+// @Param   user body models.User true "username&pwd"
+// @Success 200 {string} string	"token"
+// @Router /login [post]
 func Login(c *gin.Context) {
 	var user models.User
 	if err := c.ShouldBindJSON(&user); err != nil {
@@ -23,12 +31,10 @@ func Login(c *gin.Context) {
 	}
 }
 
-// @summary 获取指定ID记录
-// @Description get record by ID
+// @summary 获取当前的用户信息
 // @Accept  json
 // @Produce json
-// @Param   some_id path int true "userId"
-// @Success 200 {string} string	"ok"
+// @Success 200 {object} models.User
 // @Security ApiKeyAuth
 // @Router /user [get]
 func GetCurrentUser(c *gin.Context) {
