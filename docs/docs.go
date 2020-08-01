@@ -73,7 +73,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.User"
+                            "$ref": "#/definitions/models.CustomClaims"
                         }
                     }
                 }
@@ -81,9 +81,24 @@ var doc = `{
         }
     },
     "definitions": {
-        "models.User": {
+        "models.CustomClaims": {
             "type": "object",
             "properties": {
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.User": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
                 "password": {
                     "type": "string"
                 },

@@ -8,3 +8,6 @@ auth:
   issuer: dl-admin-go
   audience: fe
   expireMinutes: 120
+
+locate: en
+# locate: zh

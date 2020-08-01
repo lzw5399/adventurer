@@ -8,6 +8,7 @@ package configs
 type Config struct {
 	Db Db `yaml:"db"`
 	Auth Auth `yaml:"auth"`
+	Locate string `yaml:"locate"`
 }
 
 type Db struct {

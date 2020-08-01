@@ -1,10 +1,20 @@
 definitions:
+  models.CustomClaims:
+    properties:
+      username:
+        type: string
+    type: object
   models.User:
     properties:
+      id:
+        type: integer
       password:
         type: string
       username:
         type: string
+    required:
+    - password
+    - username
     type: object
 info:
   contact: {}
@@ -42,7 +52,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.User'
+            $ref: '#/definitions/models.CustomClaims'
       security:
       - ApiKeyAuth: []
       summary: 获取当前的用户信息
