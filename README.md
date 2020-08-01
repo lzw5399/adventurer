@@ -1,6 +1,6 @@
 ## 摸索一下基于gin开发的姿势
 
-### 目前是使用到的组件
+### 目前使用到的组件
 
 - Web框架
    > github.com/gin-gonic/gin
