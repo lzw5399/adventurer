@@ -17,13 +17,25 @@ func init() {
 
 	connstr := fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s sslmode=disable",
 		dbconfig.Host, dbconfig.Port, dbconfig.Username, dbconfig.InitialDb, dbconfig.Password)
-	if conn, err := gorm.Open("postgres", connstr); err != nil {
+	if db, err := gorm.Open("postgres", connstr); err != nil {
 		// todo 这里要记录log
 		panic(err)
 	} else {
-		global.DL_DB = conn
+		global.DL_DB = db
 		global.DL_DB.DB().SetMaxIdleConns(dbconfig.MaxIdleConn)
 		global.DL_DB.DB().SetMaxOpenConns(dbconfig.MaxOpenConn)
 		global.DL_DB.LogMode(dbconfig.LogMode)
+
+		// 这里面进行迁移操作（如果需要的话）
+		doMigration()
 	}
+}
+
+func doMigration() {
+	//global.DL_DB.AutoMigrate(&model.User{})
+	//global.DL_DB.Create(&model.User{
+	//	Id:       3,
+	//	Username: "emm",
+	//	Password: "user111",
+	//})
 }
