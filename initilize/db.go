@@ -6,7 +6,7 @@
 package initilize
 
 import (
-	"dl-admin-go/global"
+	"adventurer/global"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -34,8 +34,8 @@ func init() {
 func doMigration() {
 	//global.DL_DB.AutoMigrate(&model.User{})
 	//global.DL_DB.Create(&model.User{
-	//	Id:       3,
-	//	Username: "emm",
+	//	Id:       667,
+	//	Username: "中文测试",
 	//	Password: "user111",
 	//})
 }

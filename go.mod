@@ -1,4 +1,4 @@
-module dl-admin-go
+module adventurer
 
 go 1.14
 

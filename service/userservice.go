@@ -1,8 +1,8 @@
 package service
 
 import (
-	"dl-admin-go/global"
-	"dl-admin-go/model"
+	"adventurer/global"
+	"adventurer/model"
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )

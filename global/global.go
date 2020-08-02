@@ -6,7 +6,7 @@
 package global
 
 import (
-	"dl-admin-go/config"
+	"adventurer/config"
 	"github.com/jinzhu/gorm"
 )
 

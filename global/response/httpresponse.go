@@ -6,7 +6,7 @@
 package response
 
 import (
-	"dl-admin-go/global"
+	"adventurer/global"
 	"fmt"
 	"net/http"
 

@@ -10,7 +10,7 @@ db:
 
 auth:
   secret: thisissecret!@#
-  issuer: dl-admin-go
+  issuer: adventurer
   audience: fe
   expireMinutes: 120
 

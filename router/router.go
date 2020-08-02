@@ -1,8 +1,8 @@
 package router
 
 import (
-	"dl-admin-go/controller"
-	"dl-admin-go/middleware"
+	"adventurer/controller"
+	"adventurer/middleware"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 

@@ -15,7 +15,7 @@
 ## 项目结构
 
 ```
-├─dl-admin-go 
+├─adventurer 
    ├─controller     （api方法层）
    ├─config         （配置文件&配置结构体存放的地方）
    ├─docs  	    （swagger文档目录）
@@ -24,7 +24,7 @@
    ├─middleware     （中间件）
    ├─model          （模型）
    ├─router         （路由）
-   ├─service        (服务)
+   ├─service         (服务)
    ├─sutil	    （公共功能）
 
 ...可以添加的

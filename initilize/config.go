@@ -10,8 +10,8 @@ import (
 	"os"
 	"strings"
 
-	"dl-admin-go/global"
-	"dl-admin-go/util"
+	"adventurer/global"
+	"adventurer/util"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/configor"

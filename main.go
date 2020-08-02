@@ -1,13 +1,13 @@
 package main
 
 import (
-	"dl-admin-go/global"
+	"adventurer/global"
 	"fmt"
 	"os"
 
-	_ "dl-admin-go/docs"
-	_ "dl-admin-go/initilize"
-	"dl-admin-go/router"
+	_ "adventurer/docs"
+	_ "adventurer/initilize"
+	"adventurer/router"
 )
 
 // @title Swagger Example API

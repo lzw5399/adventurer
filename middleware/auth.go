@@ -6,8 +6,8 @@
 package middleware
 
 import (
-	"dl-admin-go/global"
-	"dl-admin-go/model"
+	"adventurer/global"
+	"adventurer/model"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"

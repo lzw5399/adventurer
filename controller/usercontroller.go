@@ -1,9 +1,9 @@
 package controller
 
 import (
-	"dl-admin-go/global/response"
-	"dl-admin-go/model"
-	"dl-admin-go/service"
+	"adventurer/global/response"
+	"adventurer/model"
+	"adventurer/service"
 	"github.com/gin-gonic/gin"
 
 	"net/http"
