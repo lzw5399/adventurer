@@ -25,13 +25,16 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/login": {
+        "/account/login": {
             "post": {
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "account"
                 ],
                 "summary": "用户登陆",
                 "parameters": [
@@ -41,7 +44,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.UserAddRequest"
+                            "$ref": "#/definitions/request.UserLoginRequest"
                         }
                     }
                 ],
@@ -55,7 +58,40 @@ var doc = `{
                 }
             }
         },
-        "/user": {
+        "/account/register": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "account"
+                ],
+                "summary": "用户注册",
+                "parameters": [
+                    {
+                        "description": "register",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.UserRegisterRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.HTTPResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/account/user": {
             "get": {
                 "security": [
                     {
@@ -67,6 +103,9 @@ var doc = `{
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "account"
                 ],
                 "summary": "获取当前的用户信息",
                 "responses": {
@@ -89,7 +128,7 @@ var doc = `{
                 }
             }
         },
-        "request.UserAddRequest": {
+        "request.UserLoginRequest": {
             "type": "object",
             "required": [
                 "password",
@@ -101,6 +140,48 @@ var doc = `{
                 },
                 "username": {
                     "type": "string"
+                }
+            }
+        },
+        "request.UserRegisterRequest": {
+            "type": "object",
+            "required": [
+                "email",
+                "gender",
+                "password",
+                "phone",
+                "username"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "gender": {
+                    "description": "male=1，female=2",
+                    "type": "integer"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "integer"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.HTTPResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object"
+                },
+                "message": {
+                    "type": "object"
+                },
+                "success": {
+                    "type": "boolean"
                 }
             }
         }

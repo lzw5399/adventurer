@@ -7,10 +7,12 @@ package global
 
 import (
 	"adventurer/config"
+	ut "github.com/go-playground/universal-translator"
 	"github.com/jinzhu/gorm"
 )
 
 var (
-	DL_CONFIG config.Config
-	DL_DB     *gorm.DB
+	DL_CONFIG     config.Config
+	DL_DB         *gorm.DB
+	DL_TRANSLOTOR ut.Translator
 )

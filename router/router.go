@@ -3,11 +3,11 @@ package router
 import (
 	"adventurer/controller"
 	"adventurer/middleware"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func InitRouter() *gin.Engine {
@@ -18,17 +18,19 @@ func InitRouter() *gin.Engine {
 	// default allow all origins
 	r.Use(cors.Default())
 
-	anonymousGroup := r.Group("/")
-	{
-		anonymousGroup.POST("login", controller.Login)
-	}
-
-	authGroup := r.Group("/", middleware.Auth())
-	{
-		authGroup.GET("user", controller.GetCurrentUser)
-	}
-
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	account := r.Group("/account")
+	{
+		account.POST("register", controller.Register)
+		account.POST("login", controller.Login)
+		account.GET("user", middleware.Auth(), controller.GetCurrentUser)
+	}
+
+	user := r.Group("/user", middleware.Auth())
+	{
+		user.GET("list", controller.ListUsers)
+	}
 
 	return r
 }

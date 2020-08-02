@@ -4,7 +4,7 @@ definitions:
       username:
         type: string
     type: object
-  request.UserAddRequest:
+  request.UserLoginRequest:
     properties:
       password:
         type: string
@@ -14,6 +14,35 @@ definitions:
     - password
     - username
     type: object
+  request.UserRegisterRequest:
+    properties:
+      email:
+        type: string
+      gender:
+        description: male=1，female=2
+        type: integer
+      password:
+        type: string
+      phone:
+        type: integer
+      username:
+        type: string
+    required:
+    - email
+    - gender
+    - password
+    - phone
+    - username
+    type: object
+  response.HTTPResponse:
+    properties:
+      data:
+        type: object
+      message:
+        type: object
+      success:
+        type: boolean
+    type: object
 info:
   contact: {}
   description: dl-admin backend api document
@@ -21,7 +50,7 @@ info:
   title: Swagger Example API
   version: "1.0"
 paths:
-  /login:
+  /account/login:
     post:
       consumes:
       - application/json
@@ -31,7 +60,7 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/request.UserAddRequest'
+          $ref: '#/definitions/request.UserLoginRequest'
       produces:
       - application/json
       responses:
@@ -40,7 +69,30 @@ paths:
           schema:
             type: string
       summary: 用户登陆
-  /user:
+      tags:
+      - account
+  /account/register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: register
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/request.UserRegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.HTTPResponse'
+      summary: 用户注册
+      tags:
+      - account
+  /account/user:
     get:
       consumes:
       - application/json
@@ -54,6 +106,8 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 获取当前的用户信息
+      tags:
+      - account
 securityDefinitions:
   ApiKeyAuth:
     in: header
