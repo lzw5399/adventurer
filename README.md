@@ -12,6 +12,27 @@
 - https://github.com/LyricTian/gin-admin
 - https://github.com/flipped-aurora/gin-vue-admin
 
+## 项目结构
+
+```
+├─dl-admin-go 
+   ├─controller     （api方法层）
+   ├─config         （配置文件&配置结构体存放的地方）
+   ├─docs  	    （swagger文档目录）
+   ├─global         （全局对象，里面的对象会在initialize里面初始化）
+   ├─initialize     （初始化）
+   ├─middleware     （中间件）
+   ├─model          （模型）
+   ├─router         （路由）
+   ├─service        (服务)
+   ├─sutil	    （公共功能）
+
+...可以添加的
+   ├─db             （数据库脚本）
+   ├─resource       （静态资源）
+   ├─core           （如果要自定义http的话可以抽取到这部分）
+```
+
 ## 目前使用到的组件
 
 - Web框架
@@ -28,3 +49,8 @@
    > github.com/dgrijalva/jwt-go
 - Log
    > github.com/sirupsen/logrus
+
+## 其他没用到但是可选的组件
+
+- 配置加载
+   > github.com/spf13/viper

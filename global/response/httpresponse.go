@@ -3,9 +3,10 @@
  * @Date: 2020/7/31 23:21
  * @Desc: 格式化错误响应
  */
-package utils
+package response
 
 import (
+	"dl-admin-go/global"
 	"fmt"
 	"net/http"
 
@@ -24,13 +25,14 @@ var (
 	trans ut.Translator
 )
 
-type HTTPError struct {
-	Code    int         `json:"code"`
+type HTTPResponse struct {
+	Success bool        `json:"success"`
 	Message interface{} `json:"message"`
+	Data    interface{} `json:"data"`
 }
 
 func init() {
-	_ = initTrans(Config.Locate)
+	_ = initTrans(global.DL_CONFIG.System.Locate)
 }
 
 // initTrans 初始化翻译器
@@ -68,29 +70,44 @@ func initTrans(locale string) (err error) {
 	return
 }
 
-func NewError(ctx *gin.Context, status int, err interface{}) {
-	er := HTTPError{
-		Code:    status,
-	}
+func Ok(c *gin.Context) {
+	result(c, true, nil, "success")
+}
+
+func OkWithMessage(message string, c *gin.Context) {
+	result(c, true, nil, message)
+}
+
+func OkWithData(data interface{}, c *gin.Context) {
+	result(c, true, data, "操作成功")
+}
+
+func OkWithDetailed(data interface{}, message string, c *gin.Context) {
+	result(c, true, data, message)
+}
+
+func Failed(c *gin.Context, status int) {
+	FailWithMessage(c, status, "操作失败")
+}
+
+func FailWithMessage(c *gin.Context, status int, err interface{}) {
+	var msg interface{}
 
 	switch err.(type) {
 	case validator.ValidationErrors:
-		er.Message = err.(validator.ValidationErrors).Translate(trans)
+		msg = err.(validator.ValidationErrors).Translate(trans)
 
 	case error:
-		er.Message = err.(error).Error()
+		msg = err.(error).Error()
 
 	case string:
-		er.Message = err.(string)
+		msg = err.(string)
 
 	default:
-		er.Message = ""
+		msg = ""
 	}
 
 	// TODO: 这一块之后需要根据status code来做判断
-	// 400: 可以不用做什么处理，前面已经处理过了
-	// 401：
-	// 404：
 	// 500: 的话不能直接返回，而是记日志再返回通用的错误信息
 	switch status {
 	// 400
@@ -104,9 +121,25 @@ func NewError(ctx *gin.Context, status int, err interface{}) {
 
 	// 500
 	case http.StatusInternalServerError:
-		er.Message = "server internal error, please contact the maintainer"
+		msg = "server internal error, please contact the maintainer"
 	}
 
-	ctx.JSON(status, er)
-	ctx.Abort()
+	resultWithStatus(c, status, false, nil, msg)
+	c.Abort()
+}
+
+func result(c *gin.Context, success bool, data interface{}, msg string) {
+	c.JSON(http.StatusOK, HTTPResponse{
+		success,
+		data,
+		msg,
+	})
+}
+
+func resultWithStatus(c *gin.Context, statusCode int, success bool, data interface{}, msg interface{}) {
+	c.JSON(statusCode, HTTPResponse{
+		success,
+		msg,
+		data,
+	})
 }

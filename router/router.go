@@ -1,8 +1,8 @@
-package routers
+package router
 
 import (
-	"dl-admin-go/controllers"
-	"dl-admin-go/middlewares"
+	"dl-admin-go/controller"
+	"dl-admin-go/middleware"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
@@ -20,12 +20,12 @@ func InitRouter() *gin.Engine {
 
 	anonymousGroup := r.Group("/")
 	{
-		anonymousGroup.POST("login", controllers.Login)
+		anonymousGroup.POST("login", controller.Login)
 	}
 
-	authGroup := r.Group("/", middlewares.Auth())
+	authGroup := r.Group("/", middleware.Auth())
 	{
-		authGroup.GET("user", controllers.GetCurrentUser)
+		authGroup.GET("user", controller.GetCurrentUser)
 	}
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

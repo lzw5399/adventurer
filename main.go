@@ -1,12 +1,12 @@
 package main
 
 import (
-	_ "dl-admin-go/docs"
-	"dl-admin-go/routers"
-	_ "dl-admin-go/utils"
-
 	"fmt"
 	"os"
+
+	_ "dl-admin-go/docs"
+	_ "dl-admin-go/initilize"
+	"dl-admin-go/router"
 )
 
 // @title Swagger Example API
@@ -17,7 +17,7 @@ import (
 // @in header
 // @name Authorization
 func main() {
-	r := routers.InitRouter()
+	r := router.InitRouter()
 
 	port := os.Getenv("PORT")
 	if port == "" {

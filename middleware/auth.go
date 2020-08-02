@@ -3,11 +3,11 @@
  * @Date: 2020/7/30 13:41
  * @Desc: check jwt token
  */
-package middlewares
+package middleware
 
 import (
-	"dl-admin-go/models"
-	"dl-admin-go/utils"
+	"dl-admin-go/initilize"
+	"dl-admin-go/model"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -17,7 +17,7 @@ import (
 )
 
 var (
-	authConfigs = utils.Config.Auth
+	authConfigs = initilize.Config.Auth
 )
 
 func Auth() gin.HandlerFunc {
@@ -61,15 +61,15 @@ func Auth() gin.HandlerFunc {
 }
 
 // 解析token为
-func parseToken(tokenString string) (*models.CustomClaims, error) {
+func parseToken(tokenString string) (*model.CustomClaims, error) {
 	// 解析token
-	token, err := jwt.ParseWithClaims(tokenString, &models.CustomClaims{}, func(token *jwt.Token) (i interface{}, err error) {
+	token, err := jwt.ParseWithClaims(tokenString, &model.CustomClaims{}, func(token *jwt.Token) (i interface{}, err error) {
 		return []byte(authConfigs.Secret), nil
 	})
 	if err != nil {
 		return nil, err
 	}
-	if claims, ok := token.Claims.(*models.CustomClaims); ok && token.Valid { // 校验token
+	if claims, ok := token.Claims.(*model.CustomClaims); ok && token.Valid { // 校验token
 		return claims, nil
 	}
 	return nil, errors.New("invalid token")

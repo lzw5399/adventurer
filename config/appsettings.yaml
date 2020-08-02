@@ -9,5 +9,5 @@ auth:
   audience: fe
   expireMinutes: 120
 
-locate: en
-# locate: zh
+system:
+  locate: en

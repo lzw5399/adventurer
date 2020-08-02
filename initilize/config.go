@@ -3,32 +3,31 @@
  * @Date: 2020/7/30 13:30
  * @Desc: load settings when application starts
  */
-package utils
+package initilize
 
 import (
-	"dl-admin-go/models/configs"
+	"dl-admin-go/config"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/configor"
 	"os"
 	"strings"
+
+	"dl-admin-go/util"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/configor"
 )
 
-var Config configs.Config
+var Config config.Config
 
-func init(){
-	loadSettings()
-}
-
-func loadSettings() {
+func init() {
 	envcode := getEnvCode()
-	overrideConfigFileName := fmt.Sprintf("configs/appsettings.%s.yaml", envcode)
+	overrideConfigFileName := fmt.Sprintf("config/appsettings.%s.yaml", envcode)
 
 	var err error
-	if Exists(overrideConfigFileName) {
-		err = configor.Load(&Config, "configs/appsettings.yaml", overrideConfigFileName)
+	if util.Exists(overrideConfigFileName) {
+		err = configor.Load(&Config, "config/appsettings.yaml", overrideConfigFileName)
 	} else {
-		err = configor.Load(&Config, "configs/appsettings.yaml")
+		err = configor.Load(&Config, "config/appsettings.yaml")
 	}
 
 	if err != nil {

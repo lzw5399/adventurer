@@ -1,13 +1,13 @@
-package services
+package service
 
 import (
-	"dl-admin-go/models"
-	"dl-admin-go/utils"
+	"dl-admin-go/initilize"
+	"dl-admin-go/model"
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )
 
-func Login(user models.User) (token string, success bool) {
+func Login(user model.User) (token string, success bool) {
 	var err error
 	if user.Username == "admin" && user.Password == "admin" {
 		if token, err = generateToken(user.Username); err != nil {
@@ -22,9 +22,9 @@ func Login(user models.User) (token string, success bool) {
 
 // 假定这里的username是唯一标识
 func generateToken(username string) (string, error) {
-	authConfig := utils.Config.Auth
+	authConfig := initilize.Config.Auth
 	// 创建一个我们自己的声明
-	c := models.CustomClaims{
+	c := model.CustomClaims{
 		Username: username,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Minute * time.Duration(authConfig.ExpireMinutes)).Unix(), // 过期时间

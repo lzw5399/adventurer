@@ -41,7 +41,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.User"
+                            "$ref": "#/definitions/request.UserAddRequest"
                         }
                     }
                 ],
@@ -73,7 +73,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.CustomClaims"
+                            "$ref": "#/definitions/model.CustomClaims"
                         }
                     }
                 }
@@ -81,7 +81,7 @@ var doc = `{
         }
     },
     "definitions": {
-        "models.CustomClaims": {
+        "model.CustomClaims": {
             "type": "object",
             "properties": {
                 "username": {
@@ -89,16 +89,13 @@ var doc = `{
                 }
             }
         },
-        "models.User": {
+        "request.UserAddRequest": {
             "type": "object",
             "required": [
                 "password",
                 "username"
             ],
             "properties": {
-                "id": {
-                    "type": "integer"
-                },
                 "password": {
                     "type": "string"
                 },
