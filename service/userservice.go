@@ -1,7 +1,7 @@
 package service
 
 import (
-	"dl-admin-go/initilize"
+	"dl-admin-go/global"
 	"dl-admin-go/model"
 	"github.com/dgrijalva/jwt-go"
 	"time"
@@ -22,7 +22,7 @@ func Login(user model.User) (token string, success bool) {
 
 // 假定这里的username是唯一标识
 func generateToken(username string) (string, error) {
-	authConfig := initilize.Config.Auth
+	authConfig := global.DL_CONFIG.Auth
 	// 创建一个我们自己的声明
 	c := model.CustomClaims{
 		Username: username,

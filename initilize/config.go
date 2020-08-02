@@ -6,28 +6,29 @@
 package initilize
 
 import (
-	"dl-admin-go/config"
 	"fmt"
 	"os"
 	"strings"
 
+	"dl-admin-go/global"
 	"dl-admin-go/util"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/configor"
 )
 
-var Config config.Config
-
+// go同一个包内有多个init，则会按文件名顺序执行
+// 如果其他的init会依赖当前这个config的init（最起码db.go依赖）
+// 所以如果需要依赖，不要让package内的其他文件排在config.go前面
 func init() {
 	envcode := getEnvCode()
 	overrideConfigFileName := fmt.Sprintf("config/appsettings.%s.yaml", envcode)
 
 	var err error
 	if util.Exists(overrideConfigFileName) {
-		err = configor.Load(&Config, "config/appsettings.yaml", overrideConfigFileName)
+		err = configor.Load(&global.DL_CONFIG, "config/appsettings.yaml", overrideConfigFileName)
 	} else {
-		err = configor.Load(&Config, "config/appsettings.yaml")
+		err = configor.Load(&global.DL_CONFIG, "config/appsettings.yaml")
 	}
 
 	if err != nil {

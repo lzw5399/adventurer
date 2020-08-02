@@ -5,8 +5,12 @@
  */
 package global
 
-import "dl-admin-go/config"
+import (
+	"dl-admin-go/config"
+	"github.com/jinzhu/gorm"
+)
 
 var (
 	DL_CONFIG config.Config
+	DL_DB     *gorm.DB
 )

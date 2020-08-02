@@ -6,7 +6,7 @@
 package middleware
 
 import (
-	"dl-admin-go/initilize"
+	"dl-admin-go/global"
 	"dl-admin-go/model"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
@@ -17,7 +17,7 @@ import (
 )
 
 var (
-	authConfigs = initilize.Config.Auth
+	authConfigs = global.DL_CONFIG.Auth
 )
 
 func Auth() gin.HandlerFunc {

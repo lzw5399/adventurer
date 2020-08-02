@@ -12,9 +12,14 @@ type Config struct {
 }
 
 type Db struct {
-	Hostname string `yaml:"hostname"`
-	Username string `yaml:"username"`
-	Password string `yaml:"password"`
+	Host        string `yaml:"host"`
+	Port        int    `yaml:"port"`
+	InitialDb   string `yaml:"initialDb"`
+	Username    string `yaml:"username"`
+	Password    string `yaml:"password"`
+	MaxIdleConn int    `yaml:"max-idle-conn"`
+	MaxOpenConn int    `yaml:"max-open-conn"`
+	LogMode     bool   `yaml:"logmode"`
 }
 
 type Auth struct {

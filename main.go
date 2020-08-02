@@ -1,6 +1,7 @@
 package main
 
 import (
+	"dl-admin-go/global"
 	"fmt"
 	"os"
 
@@ -18,6 +19,8 @@ import (
 // @name Authorization
 func main() {
 	r := router.InitRouter()
+
+	defer global.DL_DB.Close()
 
 	port := os.Getenv("PORT")
 	if port == "" {
