@@ -50,6 +50,8 @@
    > github.com/dgrijalva/jwt-go
 - Log
    > github.com/sirupsen/logrus
+- Mapper
+   > github.com/jinzhu/copier
 
 ## 其他没用到但是可选的组件
 

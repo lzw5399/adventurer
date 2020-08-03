@@ -23,6 +23,12 @@ func Register(c *gin.Context) {
 		response.FailWithMessage(c, http.StatusBadRequest, err)
 		return
 	}
+
+	if err := service.Register(r); err != nil {
+		response.FailWithMessage(c, http.StatusBadRequest, err)
+	} else {
+		response.OkWithMessage(c, "register succeed")
+	}
 }
 
 // @Tags account

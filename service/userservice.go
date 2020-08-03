@@ -4,13 +4,13 @@ import (
 	"adventurer/global"
 	"adventurer/model"
 	"adventurer/model/request"
+	"adventurer/util"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )
 
 func Register(req request.UserRegisterRequest) error {
-	// 1. 检查username是否存在
 	var count int
 	global.DL_DB.Where("username=?", req.Username).Count(&count)
 
@@ -18,14 +18,10 @@ func Register(req request.UserRegisterRequest) error {
 		return errors.New("register failed, user already exists")
 	}
 
-	// 2. mapping成db model 这里要决定一下
-	//    - mapping要在controller做还是service做
-	//    - 可以用一下mapping库
+	var account model.User
+	util.MapTo(&req, &account)
 
-	// 3. 插入数据
-	//global.DL_DB.Create()
-
-	return nil
+	return global.DL_DB.Create(&account).Error
 }
 
 func Login(user model.User) (token string, success bool) {
