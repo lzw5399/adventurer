@@ -11,22 +11,28 @@ import (
 )
 
 func Register(req request.UserRegisterRequest) error {
-	var count int
-	global.DL_DB.Where("username=?", req.Username).Count(&count)
+	var count uint
+	global.DL_DB.Model(&model.User{}).Where("username=? and deleted_at is null", req.Username).Count(&count)
 
-	if count >= 1 {
+	if count != 0 {
 		return errors.New("register failed, user already exists")
 	}
 
 	var account model.User
-	util.MapTo(&req, &account)
+	if err := util.MapTo(&req, &account); err != nil {
+		return errors.New("register failed")
+	}
+	account.CreatedAt = time.Now()
+	account.Password = util.MD5V([]byte(account.Password))
 
 	return global.DL_DB.Create(&account).Error
 }
 
 func Login(user model.User) (token string, success bool) {
 	var err error
-	if user.Username == "admin" && user.Password == "admin" {
+	var count uint
+	global.DL_DB.Model(&model.User{}).Where("username=? and password=?", user.Username, util.MD5V([]byte(user.Password))).Count(&count)
+	if count != 0 {
 		if token, err = generateToken(user.Username); err != nil {
 			return "", false
 		}

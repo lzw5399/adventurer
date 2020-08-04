@@ -130,9 +130,7 @@
             "type": "object",
             "required": [
                 "email",
-                "gender",
                 "password",
-                "phone",
                 "username"
             ],
             "properties": {
@@ -147,7 +145,7 @@
                     "type": "string"
                 },
                 "phone": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "username": {
                     "type": "string"

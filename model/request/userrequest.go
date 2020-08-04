@@ -9,9 +9,9 @@ package request
 type UserRegisterRequest struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
-	Gender int `json:"gender" binding:"gt=1,lt=2"` // male=1，female=2
-	Phone int `json:"phone" binding:"len=11"`
-	Email string `json:"email" binding:"required,email"`
+	Gender   int    `json:"gender" binding:"gte=1,lte=2"` // male=1，female=2
+	Phone    string `json:"phone" binding:"len=11"`
+	Email    string `json:"email" binding:"required,email"`
 }
 
 // 用户登陆api接收的model

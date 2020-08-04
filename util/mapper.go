@@ -7,6 +7,6 @@ package util
 
 import "github.com/jinzhu/copier"
 
-func MapTo(from, to interface{}) {
-	_ = copier.Copy(from, to)
+func MapTo(from, to interface{}) error {
+	return copier.Copy(to, from)
 }

@@ -147,9 +147,7 @@ var doc = `{
             "type": "object",
             "required": [
                 "email",
-                "gender",
                 "password",
-                "phone",
                 "username"
             ],
             "properties": {
@@ -164,7 +162,7 @@ var doc = `{
                     "type": "string"
                 },
                 "phone": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "username": {
                     "type": "string"

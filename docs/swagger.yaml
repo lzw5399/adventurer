@@ -24,14 +24,12 @@ definitions:
       password:
         type: string
       phone:
-        type: integer
+        type: string
       username:
         type: string
     required:
     - email
-    - gender
     - password
-    - phone
     - username
     type: object
   response.HTTPResponse:
