@@ -25,10 +25,10 @@ func init() {
 		global.DL_DB = db
 		global.DL_DB.DB().SetMaxIdleConns(dbconfig.MaxIdleConn)
 		global.DL_DB.DB().SetMaxOpenConns(dbconfig.MaxOpenConn)
-		global.DL_DB.LogMode(dbconfig.LogMode)
+		global.DL_DB.LogMode(dbconfig.Logmode)
 
 		// 这里面进行迁移操作（如果需要的话）
-		doMigration()
+		// doMigration()
 	}
 }
 

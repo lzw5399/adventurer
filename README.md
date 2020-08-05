@@ -49,7 +49,7 @@
 - JWT
    > github.com/dgrijalva/jwt-go
 - Log
-   > github.com/sirupsen/logrus
+   > github.com/op/go-logging
 - Mapper
    > github.com/jinzhu/copier
 
@@ -57,3 +57,5 @@
 
 - 配置加载
    > github.com/spf13/viper
+- Log
+   > github.com/sirupsen/logrus

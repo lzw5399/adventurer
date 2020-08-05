@@ -25,7 +25,7 @@ func init() {
 	overrideConfigFileName := fmt.Sprintf("config/appsettings.%s.yaml", envcode)
 
 	var err error
-	if util.Exists(overrideConfigFileName) {
+	if util.PathExists(overrideConfigFileName) {
 		err = configor.Load(&global.DL_CONFIG, "config/appsettings.yaml", overrideConfigFileName)
 	} else {
 		err = configor.Load(&global.DL_CONFIG, "config/appsettings.yaml")

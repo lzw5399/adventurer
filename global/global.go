@@ -9,10 +9,12 @@ import (
 	"adventurer/config"
 	ut "github.com/go-playground/universal-translator"
 	"github.com/jinzhu/gorm"
+	oplogging "github.com/op/go-logging"
 )
 
 var (
 	DL_CONFIG     config.Config
 	DL_DB         *gorm.DB
 	DL_TRANSLOTOR ut.Translator
+	DL_LOGGER    *oplogging.Logger
 )

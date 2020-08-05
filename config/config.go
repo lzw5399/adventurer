@@ -6,9 +6,14 @@
 package config
 
 type Config struct {
+	System System `yaml:"system"`
 	Db     Db     `yaml:"db"`
 	Auth   Auth   `yaml:"auth"`
-	System System `yaml:"system"`
+	Log    Log    `yaml:"log"`
+}
+
+type System struct {
+	Locate string `yaml:"locate"`
 }
 
 type Db struct {
@@ -19,7 +24,7 @@ type Db struct {
 	Password    string `yaml:"password"`
 	MaxIdleConn int    `yaml:"max-idle-conn"`
 	MaxOpenConn int    `yaml:"max-open-conn"`
-	LogMode     bool   `yaml:"logmode"`
+	Logmode     bool   `yaml:"logmode"`
 }
 
 type Auth struct {
@@ -29,6 +34,9 @@ type Auth struct {
 	ExpireMinutes int    `yaml:"expireMinutes"`
 }
 
-type System struct {
-	Locate string `yaml:"locate"`
+type Log struct {
+	Prefix  string `yaml:"prefix"`
+	LogFile bool   `yaml:"log-file"`
+	Stdout  string `yaml:"stdout"`
+	File    string `yaml:"file"`
 }
