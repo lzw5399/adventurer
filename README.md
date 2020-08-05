@@ -46,8 +46,10 @@
    > github.com/swaggo/gin-swagger
 - CORS(gin中间件)
    > github.com/gin-contrib/cors
-- JWT
+- 认证方式Jwt
    > github.com/dgrijalva/jwt-go
+- 授权
+   > github.com/casbin/casbin
 - Log
    > github.com/op/go-logging
 - Mapper
