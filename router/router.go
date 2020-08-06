@@ -3,6 +3,7 @@ package router
 import (
 	"adventurer/controller"
 	"adventurer/middleware"
+	"net/http"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -18,6 +19,10 @@ func InitRouter() *gin.Engine {
 	// default allow all origins
 	r.Use(cors.Default())
 
+	// swagger
+	r.GET("/", func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently, "/swagger/index.html")
+	})
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	account := r.Group("/account")
