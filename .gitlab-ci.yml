@@ -1,4 +1,4 @@
-image: docker:latest
+image: alpine:latest
 
 variables:
   appName: adventurer
@@ -14,6 +14,7 @@ stages:
 
 docker_build_and_push:
   stage: build
+  image: docker:latest
   script:
     - docker_build
 
@@ -32,6 +33,7 @@ code_quantity:
 .auto_devops: &auto_devops |
   function docker_build()
   {
+    docker login -u "$dockerhub_id" -p "#dockerhub_pwd"
     docker build -f Dockerfile -t $imageName .
   }
 
@@ -41,5 +43,4 @@ code_quantity:
   }
 
 before_script:
-  - docker login -u "$dockerhub_id" -p "#dockerhub_pwd"
   - *auto_devops
