@@ -1,8 +1,10 @@
 image: alpine:latest
 
-
 variables:
-  POSTGRES_USER: user
+  appName: adventurer
+  tag: $CI_COMMIT_SHA
+  repository: $dockerhub_id/$appName
+  imageName: $repository:$tag
 
 stages:
   - build
@@ -10,10 +12,10 @@ stages:
   - deploy
   - cleanup
 
-build:
+docker_build_and_push:
   stage: build
   script:
-    - build
+    - docker_build
 
 code_quantity:
   stage: test
@@ -23,11 +25,14 @@ code_quantity:
   allow_failure: true
   script:
     - detect_code_quantity
+  only:
+    refs:
+      - master
 
 .auto_devops: &auto_devops |
-  function build()
+  function docker_build()
   {
-    echo emm
+    docker build -f Dockerfile -t $imageName .
   }
 
   function detect_code_quantity()
@@ -36,4 +41,5 @@ code_quantity:
   }
 
 before_script:
+  - docker login -u "$dockerhub_id" -p "#dockerhub_pwd"
   - *auto_devops
