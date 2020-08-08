@@ -39,9 +39,9 @@ code_quantity:
 .auto_devops: &auto_devops |
   function docker_build()
   {
-    echo ci sha tag
+    echo ci sha $tag
     echo
-    docker login -u "$dockerhub_id" -p "#dockerhub_pwd"
+    docker login -u "$dockerhub_id" -p "$dockerhub_pwd"
     docker build -f Dockerfile -t $imageName .
   }
 
