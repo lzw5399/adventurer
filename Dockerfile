@@ -10,8 +10,8 @@ COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build .
 
-RUN mkdir publish && cp toc-generator publish && \
-    cp -r views publish && cp -r assets publish
+RUN mkdir publish && cp adventurer publish && \
+    cp -r docs publish && cp -r config publish
 
 # final stage
 FROM scratch
@@ -21,8 +21,8 @@ WORKDIR /app
 COPY --from=builder /app/publish .
 
 ENV GIN_MODE=release \
-    PORT=80
+    PORT=8080
 
-EXPOSE 80
+EXPOSE 8080
 
-ENTRYPOINT ["./toc-generator"]
+ENTRYPOINT ["./adventurer"]
