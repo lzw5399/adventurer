@@ -9,6 +9,8 @@ variables:
   REPOSITORY: $DOCKERHUB_ID/$APP_NAME
   IMAGE_NAME: $REPOSITORY:$TAG
 
+  CI_DEBUG_TRACE: "true" # debug ci
+
 stages:
   - build
   - test
