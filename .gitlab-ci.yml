@@ -37,12 +37,14 @@ code_quantity:
       - master
 
 .auto_devops: &auto_devops |
+  export DOCKER_IMAGE_NAME=$IMAGE_NAME
+
   function docker_build()
   {
     echo ci sha $TAG
     docker login -u "$DOCKERHUB_ID" -p "$DOCKERHUB_PWD"
     echo $DOCKERHUB_ID/$APP_NAME:$CI_COMMIT_SHA
-    docker build -f Dockerfile -t "$IMAGE_NAME" .
+    docker build -f Dockerfile -t "$DOCKER_IMAGE_NAME" .
   }
 
   function detect_code_quantity()
