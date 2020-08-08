@@ -21,6 +21,7 @@ docker_build_and_push:
   services:
     - docker:18-dind
   script:
+    - echo $$dockerhub_id
     - docker_build
 
 code_quantity:

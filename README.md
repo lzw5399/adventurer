@@ -1,3 +1,5 @@
+[![pipeline status](https://gitlab.com/lzw5399/adventurer/badges/master/pipeline.svg)](https://gitlab.com/lzw5399/adventurer/-/commits/master)
+
 # 摸索一下基于gin开发的姿势
 
 ## 目标
