@@ -9,7 +9,7 @@ variables:
   REPOSITORY: $DOCKERHUB_ID/$APP_NAME
   IMAGE_NAME: $REPOSITORY:$TAG
 
-  CI_DEBUG_TRACE: "true" # debug ci
+  #CI_DEBUG_TRACE: "true" # debug ci
 
 stages:
   - build
@@ -40,13 +40,15 @@ code_quantity:
 
 .auto_devops: &auto_devops |
   export DOCKER_IMAGE_NAME=$IMAGE_NAME
+  export emm=$CI_REGISTRY_IMAGE
 
   function docker_build()
   {
+    echo $emm
     echo ci sha $TAG
     docker login -u "$DOCKERHUB_ID" -p "$DOCKERHUB_PWD"
     echo $DOCKERHUB_ID/$APP_NAME:$CI_COMMIT_SHA
-    docker build -f Dockerfile -t "$DOCKER_IMAGE_NAME" .
+    docker build -f Dockerfile -t "$CI_REGISTRY_IMAGE:233" .
   }
 
   function detect_code_quantity()
