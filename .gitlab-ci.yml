@@ -40,15 +40,15 @@ code_quantity:
 
 .auto_devops: &auto_devops |
   export DOCKER_IMAGE_NAME=$IMAGE_NAME
-  export emm=$CI_REGISTRY_IMAGE
 
   function docker_build()
   {
-    echo $emm
+    echo $CI_REGISTRY
+    echo $CI_REGISTRY_IMAGE
     echo ci sha $TAG
-    docker login -u "$DOCKERHUB_ID" -p "$DOCKERHUB_PWD"
-    echo $DOCKERHUB_ID/$APP_NAME:$CI_COMMIT_SHA
-    docker build -f Dockerfile -t "$CI_REGISTRY_IMAGE:233" .
+    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" $CI_REGISTRY
+    docker build -f Dockerfile -t "$CI_REGISTRY_IMAGE:$TAG" .
+    docker push $CI_REGISTRY_IMAGE:$TAG
   }
 
   function detect_code_quantity()
